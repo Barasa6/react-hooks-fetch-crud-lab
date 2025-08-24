@@ -1,25 +1,23 @@
+// QuestionList.js
 import React from "react";
+import QuestionItem from "./QuestionItem";
 
-function QuestionItem({ question }) {
-  const { id, prompt, answers, correctIndex } = question;
-
-  const options = answers.map((answer, index) => (
-    <option key={index} value={index}>
-      {answer}
-    </option>
-  ));
-
+function QuestionList({ questions, onDeleteQuestion, onUpdateQuestion }) {
   return (
-    <li>
-      <h4>Question {id}</h4>
-      <h5>Prompt: {prompt}</h5>
-      <label>
-        Correct Answer:
-        <select defaultValue={correctIndex}>{options}</select>
-      </label>
-      <button>Delete Question</button>
-    </li>
+    <section>
+      <h1>Quiz Questions</h1>
+      <ul>
+        {questions.map((q) => (
+          <QuestionItem
+            key={q.id}
+            question={q}
+            onDeleteQuestion={onDeleteQuestion}
+            onUpdateQuestion={onUpdateQuestion}
+          />
+        ))}
+      </ul>
+    </section>
   );
 }
 
-export default QuestionItem;
+export default QuestionList;
